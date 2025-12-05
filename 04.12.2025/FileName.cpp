@@ -9,7 +9,7 @@ struct IPrint
 
 
 
-class Transport : IPrint
+class Transport : public IPrint
 {
 protected:
 	string model;
@@ -25,7 +25,7 @@ public:
 
 
 
-class Auto : Transport
+class Auto : public Transport
 {
 	string color;
 	double speed;
@@ -42,7 +42,7 @@ public:
 	}
 };
 
-class Plane : Transport
+class Plane : public Transport
 {
 	int passangers;
 	int wings;
@@ -74,7 +74,7 @@ public:
 
 
 
-class Animal : IPrint
+class Animal : public IPrint
 {
 protected:
 	string name;
@@ -91,8 +91,9 @@ public:
 
 
 
-class Pinguin : Animal
+class Pinguin : public Animal
 {
+	
 	double family;
 	int weight;
 public:
@@ -109,7 +110,7 @@ public:
 };
 
 
-class Dog : Animal
+class Dog : public Animal
 {
 	string breed;
 	string sex;
@@ -130,5 +131,33 @@ public:
 
 int main()
 {
+	IPrint* iprint = nullptr;
 
+	int choice = 0;
+
+	cout << "1. Auto" << endl;
+	cout << "2. Plane" << endl;
+	cout << "3. Pinguin" << endl;
+
+	cout << "4. Dog" << endl;
+	cout << "Make your choice: ";
+
+	cin >> choice;
+
+	switch (choice)
+	{
+	case 1:
+		iprint = new Auto("Red", 220);
+		break;
+	case 2:
+		iprint = new Plane(65, 2);
+		break;
+	case 3:
+		iprint = new Pinguin(2, 25);
+		break;
+	case 4:
+		iprint = new Dog("Female", "Taksa");
+		break;
+	}
+	iprint->PrintConsole();
 }
